@@ -1,7 +1,8 @@
-// const express = require('express');
-// const router = express.Router();
-// const { testAPI } = require('../controller/testController');
+const express = require("express");
+const router = express.Router();
+const userController = require('../controller/userController');
 
-// router.get('/', testAPI);
+router.post("/createUser", userController.createUser);
+// router.post('/createProduct', productController);
 
-// module.exports = router;
+module.exports = router;

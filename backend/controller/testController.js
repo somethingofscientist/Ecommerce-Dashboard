@@ -6,3 +6,7 @@ const testAPI = (req, res) => {
         message: "Test API Working",
     })
 }
+
+module.exports = [
+    testAPI,
+]

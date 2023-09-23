@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styles from './Create.module.css';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 const CreateAccount = () => {
   const [form, setForm] = useState({
@@ -17,15 +18,31 @@ const CreateAccount = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(form);
-    setForm({
-      name: '',
-      email: '',
-      password: '',
-      username: '',
-    });
+
+    const { name, email, password, username } = form;
+
+    try {
+      let result = await fetch('http://localhost:9000/createUser', {
+        method: 'post',
+        body: JSON.stringify({ name, email, password, username }),
+        header: {
+          'Content-Type': 'application/json'
+        },
+      });
+      result = await result.json();
+      console.log("res ->", result);
+      // setForm({
+      //   name: '',
+      //   email: '',
+      //   password: '',
+      //   username: '',
+      // });
+    } catch (error) {
+      console.log('Error happpend', error.message)
+      console.log('Error happpend')
+    }
   };
 
   return (
@@ -44,6 +61,7 @@ const CreateAccount = () => {
           placeholder='Name'
           value={form.name} // Update to use form.name
           onChange={handleChange}
+          required
         />
         <input
           type="email"

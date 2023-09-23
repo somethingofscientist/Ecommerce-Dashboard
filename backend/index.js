@@ -1,20 +1,27 @@
+const cors = require('cors');
 const express = require('express');
 const dotenv = require('dotenv');
-const router = require('./router/router');
-const connectDB = require('./db/DB')
-dotenv.config();
 const app = express();
+dotenv.config();
+
+const connectDB = require('./db/DB')
+const routes = require('./router/router');
+
+
 
 // middlewares
 app.use(express.json());
-// app.use('/api/v1', router)
+const corsOptions = {
+    origin: 'http://localhost:3000', // Replace with your frontend origin
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    optionsSuccessStatus: 204,
+};
 
-app.get('/', (req, res) => {
-    res.status(200).json({
-        success: true,
-        message: "API Working"
-    })
-})
+app.use(cors(corsOptions));
+app.use('/', routes)
+
+
+
 
 connectDB();
 app.listen(process.env.PORT, () => {
