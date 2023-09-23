@@ -1,0 +1,33 @@
+.header {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90px;
+    backdrop-filter: blur(10px);
+    /* background-color: black; */
+    /* color: white; */
+    border-bottom: 1px solid rgb(211, 211, 211);
+    margin-bottom: 20px;
+}
+
+.right {
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+}
+
+.link {
+    padding: 20px 10px;
+    border-radius: 10px;
+    margin-right: 10px;
+}
+
+.header .left {
+    width: 5%;
+}
+
+.header .left img {
+    width: 100%;
+}

@@ -1,0 +1,43 @@
+.screen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 50px;
+    height: 100vh;
+    width: 100%;
+    font-weight: bold;
+}
+
+.screen p {
+    position: absolute;
+    color: white;
+    /* bottom: 20%; */
+}
+
+.screen img {
+    width: 100%;
+    position: absolute;
+    z-index: -1;
+}
+
+@media (max-width:420px) {
+    .screen {
+        background-color: black;
+        width: 100%;
+        z-index: -2;
+    }
+
+    .screen p {
+        position: absolute;
+        color: white;
+        font-size: 30px;
+        z-index: 2;
+    }
+
+    .screen img {
+        width: 100%;
+        position: absolute;
+        z-index: 1;
+    }
+
+}

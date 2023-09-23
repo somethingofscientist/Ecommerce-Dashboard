@@ -1,0 +1,31 @@
+.header {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top: 1px solid rgb(211, 211, 211);
+}
+
+.right {
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+}
+
+.link {
+    /* background-color: red; */
+    padding: 20px 40px;
+    border-radius: 10px;
+    margin-right: 20px;
+}
+
+.header .left {
+    width: 5%;
+}
+
+.header .left img {
+    width: 100%;
+}
