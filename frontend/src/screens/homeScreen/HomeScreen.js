@@ -8,7 +8,7 @@ import styles from './HomeScreen.module.css';
 export const HomeScreen = () => {
   return (
     <>
-      <Header />
+      {/* <Header /> */}
       <div className={styles.homeScreen}>
         <h1>S</h1>
       </div>

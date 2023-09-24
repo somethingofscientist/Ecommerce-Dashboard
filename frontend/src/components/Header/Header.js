@@ -6,6 +6,10 @@ import LoginScreen from '../../screens/loginScreen/LoginScreen';
 import logo from '../../assets/iceCream.jpg';
 
 const Header = () => {
+    const auth = localStorage.getItem('user credentials');
+    const handleLogout = () => {
+        localStorage.clear('');
+    }
     return (
         <div className={styles.header}>
             <div className={styles.left}>
@@ -22,9 +26,18 @@ const Header = () => {
                 <div className={styles.link}>
                     <Link to="/profile">Profile</Link>
                 </div>
-                <div className={styles.link}>
-                    <Link to="/login">Logout</Link>
-                </div>
+                {
+                    auth ?
+                        <div className={styles.link}>
+                            <Link
+                                to="/login"
+                                onClick={handleLogout}
+                            >Logout</Link>
+                        </div> :
+                        <div className={styles.link}>
+                            <Link to="/create">Create</Link>
+                        </div>
+                }
             </div>
         </div>
     )

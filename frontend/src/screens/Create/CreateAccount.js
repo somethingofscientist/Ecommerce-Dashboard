@@ -3,6 +3,8 @@ import styles from './Create.module.css';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+
 
 const CreateAccount = () => {
   const navigate = useNavigate();
@@ -16,7 +18,8 @@ const CreateAccount = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setForm((prev) => ({
-      ...prev, [name]: value
+      ...prev,
+      [name]: value
     }));
   };
 
@@ -26,7 +29,7 @@ const CreateAccount = () => {
     const { name, email, password, username } = form;
 
     try {
-      let result = await axios('http://localhost:9000/createUser', {
+      let result = await axios.post('http://localhost:9000/createUser', {
         name,
         email,
         password,
@@ -36,6 +39,9 @@ const CreateAccount = () => {
           'Content-Type': 'application/json',
         },
       });
+      if (result) {
+        toast.success('User Created')
+      }
 
       setForm({
         name: '',
@@ -44,9 +50,12 @@ const CreateAccount = () => {
         username: '',
       });
 
-      navigate('/login')
+      localStorage.setItem('user credentials', JSON.stringify(result.data))
+      // navigate('/login')
+      console.log('resutl', result.data);
     }
     catch (error) {
+      toast.warning('User Created')
       console.log('Error happpend', error.message)
     }
   };
