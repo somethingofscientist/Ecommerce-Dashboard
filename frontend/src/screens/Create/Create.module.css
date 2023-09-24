@@ -19,7 +19,7 @@ button {
 }
 
 button:hover {
-    background-color: rgba(88, 88, 88, 0.385);
+    background-color: rgba(88, 88, 88, 0.385) !important;
     color: black;
 }
 

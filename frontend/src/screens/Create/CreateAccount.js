@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './Create.module.css';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -16,12 +16,19 @@ const CreateAccount = () => {
   });
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value } = e.target
     setForm((prev) => ({
       ...prev,
       [name]: value
     }));
   };
+
+  useEffect(() => {
+    const auth = localStorage.getItem('user credential');
+    if (auth) {
+      navigate('/');
+    }
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -51,12 +58,10 @@ const CreateAccount = () => {
       });
 
       localStorage.setItem('user credentials', JSON.stringify(result.data))
-      // navigate('/login')
-      console.log('resutl', result.data);
+
     }
     catch (error) {
-      toast.warning('User Created')
-      console.log('Error happpend', error.message)
+      toast.error('Error in Creation')
     }
   };
 
@@ -84,6 +89,7 @@ const CreateAccount = () => {
           placeholder='Email'
           value={form.email} // Update to use form.email
           onChange={handleChange}
+          required
         />
         <input
           type="text"
@@ -91,6 +97,7 @@ const CreateAccount = () => {
           placeholder='Username'
           value={form.username} // Update to use form.username
           onChange={handleChange}
+          required
         />
         <input
           type="password"
@@ -98,13 +105,19 @@ const CreateAccount = () => {
           placeholder='Password'
           value={form.password} // Update to use form.password
           onChange={handleChange}
+          required
         />
         <button
           type='submit'>
           Create
         </button>
+        <Link to='/login'>
+          <button>
+            Login
+          </button>
+        </Link>
       </form>
-    </div >
+    </div>
   );
 };
 

@@ -10,7 +10,7 @@ export const HomeScreen = () => {
     <>
       {/* <Header /> */}
       <div className={styles.homeScreen}>
-        <h1>S</h1>
+        <h1>HomeScreen Here ...</h1>
       </div>
       {/* <Footer /> */}
     </>

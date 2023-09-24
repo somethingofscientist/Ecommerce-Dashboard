@@ -1,24 +1,91 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from './Login.module.css';
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { toast } from 'react-toastify';
 
 
 const LoginScreen = () => {
-    const handleSubmit = (e) => {
+
+    const navigate = useNavigate();
+    const [form, setForm] = useState({
+        email: "",
+        password: "",
+    })
+
+    const handleChange = (e) => {
+        console.log('e', e.target.value);
+        const { name, value } = e.target
+        setForm((obj) => ({
+            ...obj,
+            [name]: value
+        }));
+    };
+
+    useEffect(() => {
+        const auth = localStorage.getItem('user credential');
+        if (auth) {
+            navigate('/');
+        }
+    }, []);
+
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log('Login button clicked...')
+        try {
+            const { email, password } = form;
+            const result = await axios.post("http://localhost:9000/loginUser", {
+                email,
+                password,
+            }, {
+                headers: {
+                    "Content-Type": "application/json",
+                }
+            });
+
+            if (result.status === 200) {
+                toast.success('Login successful');
+                localStorage.setItem('user credentials', JSON.stringify(result.data))
+                setForm({
+                    email: "",
+                    password: "",
+                })
+                navigate('/');
+            }
+            else if (result.status !== 200) {
+                toast.error('Login unsuccessful')
+            }
+        } catch (error) {
+            toast.dismiss()
+            toast.error(error.response.data.error);
+        }
     }
     return (
         <>
             <div className={styles.form}>
                 <form onSubmit={handleSubmit}>
+                    <h1
+                        style={{
+                            margin: "20px"
+                        }}
+                    >
+                        Login
+                    </h1>
                     <input
-                        type="text"
-                        placeholder='Username'
+                        type="email"
+                        name="email"
+                        placeholder='email'
+                        value={form.email}
+                        onChange={handleChange}
+                        required
                     />
                     <input
                         type="password"
-                        placeholder='Password'
+                        name="password"
+                        placeholder='password'
+                        value={form.password}
+                        onChange={handleChange}
+                        required
                     />
                     <button
                         type='submit'>
