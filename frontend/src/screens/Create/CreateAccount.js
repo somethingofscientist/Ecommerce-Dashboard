@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import styles from './Create.module.css';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const CreateAccount = () => {
+  const navigate = useNavigate();
   const [form, setForm] = useState({
     name: '',
     email: '',
@@ -24,24 +26,28 @@ const CreateAccount = () => {
     const { name, email, password, username } = form;
 
     try {
-      let result = await fetch('http://localhost:9000/createUser', {
-        method: 'post',
-        body: JSON.stringify({ name, email, password, username }),
-        header: {
-          'Content-Type': 'application/json'
+      let result = await axios('http://localhost:9000/createUser', {
+        name,
+        email,
+        password,
+        username
+      }, {
+        headers: {
+          'Content-Type': 'application/json',
         },
       });
-      result = await result.json();
-      console.log("res ->", result);
-      // setForm({
-      //   name: '',
-      //   email: '',
-      //   password: '',
-      //   username: '',
-      // });
-    } catch (error) {
+
+      setForm({
+        name: '',
+        email: '',
+        password: '',
+        username: '',
+      });
+
+      navigate('/login')
+    }
+    catch (error) {
       console.log('Error happpend', error.message)
-      console.log('Error happpend')
     }
   };
 
