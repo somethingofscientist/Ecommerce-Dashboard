@@ -85,7 +85,7 @@ const AddProduct = () => {
                         value={form.price}
                         onChange={handleChange}
                     />
-
+    
                     <button
                         type='submit'
                     >
