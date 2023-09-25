@@ -32,11 +32,11 @@ const Header = () => {
                 {
                     isLogin ?
                         (<>
-                            <div className= {
-    styles.link
-}
+                            <div className={
+                                styles.link
+                            }
 
-><Link to="/">Products</Link></div>
+                            ><Link to="/">Products</Link></div>
                             <div className={styles.link}>
                                 <Link to="/add">Add Product</Link>
                             </div>

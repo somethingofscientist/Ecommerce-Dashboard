@@ -11,7 +11,15 @@ export const HomeScreen = () => {
   const [productData, setProductData] = useState([]);
 
   const handleEdit = () => { }
-  const handleDelete = () => { }
+  const handleDelete = async (id) => {
+    // try {
+    //   await axios.delete(`http://localhost:9000/deleteProduct/${id}`)
+    // }
+    // catch (error) {
+    //   console.error('Error deleting product:', error);
+    // }
+    console.log(id._id);
+  }
 
 
   const customStyles = {
@@ -37,7 +45,7 @@ export const HomeScreen = () => {
     },
     {
       name: 'Product Price',
-      selector: (row) => row.price,
+      selector: (row) => "₹ " + row.price,
       sortable: true,
     },
     {
@@ -84,7 +92,6 @@ export const HomeScreen = () => {
 
   return (
     <div className={styles.homeScreen}>
-      {/* <h1>HomeScreen Here ...</h1> */}
       <div className={styles.table}>
         <DataTable
           title="Product List"

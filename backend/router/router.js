@@ -7,5 +7,6 @@ router.post("/createUser", userController.createUser);
 router.post("/loginUser", userController.loginUser);
 router.post("/addProduct", createProduct.createProduct)
 router.get("/allProducts", createProduct.allProducts)
+router.delete("/deleteProduct/:id", createProduct.deleteProduct)
 
 module.exports = router;

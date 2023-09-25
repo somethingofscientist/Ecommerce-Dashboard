@@ -9,6 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import PrivateRoutes from './components/PrivateRoutes/PrivateRoutes';
 import Header from './components/Header/Header';
 import AddProduct from './screens/addProduct/AddProduct';
+import UpdateProduct from './screens/updateProduct/UpdateProduct';
 
 const App = () => {
   const auth = localStorage.getItem('user credentials');
@@ -19,6 +20,7 @@ const App = () => {
         <Route element={<PrivateRoutes />}>
           <Route path='/' element={<HomeScreen />} />
           <Route path='/add' element={<AddProduct />} />
+          <Route path='/update' element={<UpdateProduct />} />
         </Route>
 
 
