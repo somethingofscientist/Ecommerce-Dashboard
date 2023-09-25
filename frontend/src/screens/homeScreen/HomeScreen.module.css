@@ -1,7 +1,40 @@
-.homeScreen{
+.homeScreen {
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+}
+
+.homeScreen .table {
+    width: 80%;
+
+    text-align: left;
+    border-radius: 10px;
+    border: 1px solid rgb(224, 224, 224);
+}
+
+.table_icon_holder {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.table_icon {
+    font-size: 19px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.table_icon:hover {
+    color: blueviolet;
+}
+
+@media (max-width:420px) {
+    .homeScreen .table {
+        width: 90%;
+        text-align: left;
+        border-radius: 10px;
+        border: 1px solid rgb(224, 224, 224);
+    }
 }

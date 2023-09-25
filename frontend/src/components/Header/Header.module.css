@@ -35,7 +35,17 @@
 }
 
 @media (max-width: 420px) { 
+    .header{
+        flex-wrap: wrap;
+    }
     .header .left {
-        width: 18%;
+        width: 10%;
+    }
+    .header .left img{
+        width: 100%;
+    }
+    .header .right{
+        width: 100%;
+        font-size: 12px;
     }
 }

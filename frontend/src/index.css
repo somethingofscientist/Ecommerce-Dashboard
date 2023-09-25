@@ -10,15 +10,10 @@
   color: inherit;
 }
 
-::selection {
-  color: rgb(255, 255, 255);
-  background: rgb(0, 0, 0);
-}
-
 input {
   padding: 10px;
   outline: none;
-  font-size: 25px;
+  font-size: 20px;
   border-radius: 10px;
   margin-bottom: 20px;
   border: 1px solid rgb(213, 213, 213);
