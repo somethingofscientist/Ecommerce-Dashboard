@@ -13,11 +13,11 @@
     padding: 10px 60px;
     border: none;
     color: white;
-    background-color: black;
+    background-color: #900a5c;
     margin-bottom: 20px;
 }
 
-button:hover {
-    background-color: rgba(88, 88, 88, 0.385) !important;
-    color: black;
+.form button:hover {
+    background-color: #900a5c !important;
+    color: rgb(255, 255, 255);
 }

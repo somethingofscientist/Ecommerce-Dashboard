@@ -14,12 +14,12 @@
     border: none;
     color: white;
     margin-bottom: 20px;
-    background-color: rgb(29, 29, 29);
+    background-color: #900a5c;
 }
 
 button:hover {
-    background-color: rgba(88, 88, 88, 0.385) !important;
-    color: black;
+    background-color: #900a5c !important;
+    color: rgb(255, 255, 255);
 }
 
 .amazingText {

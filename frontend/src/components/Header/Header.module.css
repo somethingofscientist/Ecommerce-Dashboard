@@ -1,16 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Libre+Baskerville&display=swap');
+
+
 .header {
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 90px;
-    backdrop-filter: blur(10px);
-    /* background-color: black; */
-    /* color: white; */
-    border-bottom: 1px solid rgb(211, 211, 211);
-    margin-bottom: 20px;
+    background-color: #900a5c;
+    color: white;
     position: fixed;
     top: 0;
+    z-index: 99;
+    padding: 10px 0;
+    font-size: 20px;
 }
 
 .right {
@@ -34,17 +36,20 @@
     width: 100%;
 }
 
-@media (max-width: 420px) { 
-    .header{
+@media (max-width: 420px) {
+    .header {
         flex-wrap: wrap;
     }
+
     .header .left {
         width: 10%;
     }
-    .header .left img{
+
+    .header .left img {
         width: 100%;
     }
-    .header .right{
+
+    .header .right {
         width: 100%;
         font-size: 12px;
     }

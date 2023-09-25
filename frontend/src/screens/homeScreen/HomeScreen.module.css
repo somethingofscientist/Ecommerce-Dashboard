@@ -8,10 +8,9 @@
 
 .homeScreen .table {
     width: 80%;
-
     text-align: left;
     border-radius: 10px;
-    border: 1px solid rgb(224, 224, 224);
+    border-bottom: 1px solid rgb(224, 224, 224);
 }
 
 .table_icon_holder {
@@ -35,6 +34,6 @@
         width: 90%;
         text-align: left;
         border-radius: 10px;
-        border: 1px solid rgb(224, 224, 224);
+        /* border: 1px solid rgb(224, 224, 224); */
     }
 }

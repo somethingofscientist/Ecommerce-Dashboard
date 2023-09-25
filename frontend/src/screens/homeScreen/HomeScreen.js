@@ -13,6 +13,22 @@ export const HomeScreen = () => {
   const handleEdit = () => { }
   const handleDelete = () => { }
 
+
+  const customStyles = {
+    headRow: {
+      style: {
+        backgroundColor: '#900a5c',
+        color: 'white'
+      },
+    },
+    headCells: {
+      style: {
+        fontSize: '16px', // Customize header cell font size
+        fontWeight: 'bold', // Customize header cell font weight
+      },
+    },
+  };
+
   const columns = [
     {
       name: 'Product Name',
@@ -72,18 +88,14 @@ export const HomeScreen = () => {
       <div className={styles.table}>
         <DataTable
           title="Product List"
+          customStyles={customStyles}
           columns={columns}
           data={productData}
           pagination
-
-          // selectableRows
-          // dense
-          // customStyles={customStyles}
-
           highlightOnHover
           pointerOnHover
-          fixedHeader
-          fixedHeaderScrollHeight="1000px"
+        // fixedHeader
+        // fixedHeaderScrollHeight="700px"
         />
       </div>
     </div>
