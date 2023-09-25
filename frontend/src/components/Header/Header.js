@@ -22,29 +22,41 @@ const Header = () => {
                 </Link>
             </div>
             <div className={styles.right}>
-                <div className={styles.link}>
-                    <Link to="/">Products</Link>
-                </div>
-                {/* <div className={styles.link}>
-                    <Link to="/profile">Profile</Link>
-                </div> */}
                 {
                     auth ?
-                        <div
-                            className={styles.link}
-                            onClick={handleLogout}
-                        >
-                            <Link to="/login">
+                        <>
+                            <div className={styles.link}>
+                                <Link to="/">Products</Link>
+                            </div>
+                            <div className={styles.link}>
+                                <Link to="/add">Add Product</Link>
+                            </div>
+                            <div className={styles.link}>
+                                <Link to="/update">Update Product</Link>
+                            </div>
+                            <div
+                                className={styles.link}
+                                onClick={handleLogout}
+                            >
+                                <Link to="/login">
 
-                                Logout
-                            </Link>
-                        </div>
+                                    Logout
+                                </Link>
+                            </div>
+                        </>
                         :
-                        <div className={styles.link}>
-                            <Link to="/create">
-                                Create
-                            </Link>
-                        </div>
+                        <>
+                            <div className={styles.link}>
+                                <Link to="/create">
+                                    Create
+                                </Link>
+                            </div>
+                            <div className={styles.link}>
+                                <Link to="/login">
+                                    Login
+                                </Link>
+                            </div>
+                        </>
                 }
             </div>
         </div>

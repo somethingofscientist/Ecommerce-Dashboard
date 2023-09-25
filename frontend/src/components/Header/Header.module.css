@@ -9,6 +9,8 @@
     /* color: white; */
     border-bottom: 1px solid rgb(211, 211, 211);
     margin-bottom: 20px;
+    position: fixed;
+    top: 0;
 }
 
 .right {
@@ -30,4 +32,10 @@
 
 .header .left img {
     width: 100%;
+}
+
+@media (max-width: 420px) { 
+    .header .left {
+        width: 18%;
+    }
 }

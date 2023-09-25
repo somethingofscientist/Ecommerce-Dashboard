@@ -5,13 +5,21 @@ const productSchema = new mongoose.Schema({
         type: String,
         required: [true, 'Name is required'],
     },
+    userId: {
+        type: String,
+        // required: [true, 'Name is required'],
+    },
     price: {
         type: Number,
-        required: [true, 'Name is required'],
+        required: [true, 'Price is required'],
     },
-    description: {
+    category: {
         type: String,
-        required: [true, 'Name is required'],
+        required: [true, 'Category is required'],
+    },
+    company: {
+        type: String,
+        required: [true, 'Company is required'],
     },
 })
 

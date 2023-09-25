@@ -7,14 +7,12 @@ import { toast } from 'react-toastify';
 
 const LoginScreen = () => {
 
-    const navigate = useNavigate();
     const [form, setForm] = useState({
         email: "",
         password: "",
     })
 
     const handleChange = (e) => {
-        console.log('e', e.target.value);
         const { name, value } = e.target
         setForm((obj) => ({
             ...obj,
@@ -22,8 +20,9 @@ const LoginScreen = () => {
         }));
     };
 
+    const navigate = useNavigate();
     useEffect(() => {
-        const auth = localStorage.getItem('user credential');
+        const auth = localStorage.getItem('user credentials');
         if (auth) {
             navigate('/');
         }

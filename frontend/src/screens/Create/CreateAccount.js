@@ -24,7 +24,7 @@ const CreateAccount = () => {
   };
 
   useEffect(() => {
-    const auth = localStorage.getItem('user credential');
+    const auth = localStorage.getItem('user credentials');
     if (auth) {
       navigate('/');
     }
