@@ -5,7 +5,7 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 
 
-const LoginScreen = () => {
+const LoginScreen = () => { 
 
     const [form, setForm] = useState({
         email: "",
@@ -50,6 +50,7 @@ const LoginScreen = () => {
                     password: "",
                 })
                 navigate('/');
+                // redirect('/');  
             }
             else if (result.status !== 200) {
                 toast.error('Login unsuccessful')

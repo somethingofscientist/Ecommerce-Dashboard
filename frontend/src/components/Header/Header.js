@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { HomeScreen } from '../../screens/homeScreen/HomeScreen';
 import LoginScreen from '../../screens/loginScreen/LoginScreen';
 import logo from '../../assets/iceCream.jpg';
+import { BsGlobe2, BsFillCartCheckFill } from 'react-icons/bs'
 
 const Header = () => {
     const [isLogin, setisLogin] = useState(false);
@@ -24,7 +25,10 @@ const Header = () => {
             <div className={styles.left}>
                 <Link to="/">
                     <div className={styles.logo}>
-                        <img src="https://clipart-library.com/img1/764205.png" alt="" />
+                        <BsFillCartCheckFill
+                            size={50}
+                        />
+                        {/* <img src="https://clipart-library.com/img1/764205.png" alt="" /> */}
                     </div>
                 </Link>
             </div>
@@ -35,8 +39,8 @@ const Header = () => {
                             <div className={
                                 styles.link
                             }
-
-                            ><Link to="/">Products</Link></div>
+                            >
+                                <Link to="/">Products</Link></div>
                             <div className={styles.link}>
                                 <Link to="/add">Add Product</Link>
                             </div>
@@ -66,6 +70,10 @@ const Header = () => {
                             </div>
                         </>)
                 }
+
+                <h6>
+                    Dark Mode
+                </h6>
             </div>
         </div>
     )

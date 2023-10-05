@@ -1,16 +1,34 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from '../addProduct/AddProduct.module.css';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import { useParams } from 'react-router-dom';
 
 
 const UpdateProduct = () => {
+    const params = useParams();
+
     const [form, setForm] = useState({
         name: "",
         price: "",
         company: "",
         category: "",
     })
+
+    useEffect(() => {
+        getSingleProduct();
+    }, [])
+
+    const getSingleProduct = async () => {
+        let product = await axios.get(`http://localhost:9000/singleProduct/${params.id}`);
+        setForm({
+            name: product.data.result.name || "",
+            price: product.data.result.price || "",
+            company: product.data.result.company || "",
+            category: product.data.result.category || "",
+        });
+
+    }
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -24,7 +42,7 @@ const UpdateProduct = () => {
         e.preventDefault();
         const { name, price, company, category } = form;
         try {
-            const result = await axios.post("http://localhost:9000/addProduct", {
+            const result = await axios.put(`http://localhost:9000/updateProduct/${params.id}`, {
                 name,
                 price,
                 company,
@@ -34,7 +52,7 @@ const UpdateProduct = () => {
                     'Content-Type': 'application/json'
                 }
             });
-            if (result.status === 201) {
+            if (result.status === 200) {
                 toast.success('Product created successfully')
                 setForm({
                     name: "",
@@ -44,7 +62,7 @@ const UpdateProduct = () => {
                 })
             }
             else {
-                toast.error('Error in product creation')
+                toast.error('Error in update creation')
             }
         } catch (error) {
             toast.dismiss()
@@ -89,7 +107,7 @@ const UpdateProduct = () => {
                     <button
                         type='submit'
                     >
-                        Add Product
+                        Update Product
                     </button>
                 </form>
             </div>

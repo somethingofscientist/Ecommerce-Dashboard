@@ -32,7 +32,7 @@ exports.allProducts = async (req, res) => {
         }
         else {
             res.status(200).json({
-                message: "No prdoduct Found"
+                message: "No product Found"
             })
         }
     } catch (error) {
@@ -43,11 +43,57 @@ exports.allProducts = async (req, res) => {
     }
 }
 
-exports.deleteProduct = async(req, res) => {
+exports.singleProduct = async (req, res) => {
+    try {
+        const productId = req.params.id;
+        const result = await productModel.findById(productId);
+        if (!result) {
+            res.status(200).json({
+                success: true,
+                message: "No Product Found With This Id and Name"
+            })
+        }
+        else {
+            res.status(200).json({
+                success: true,
+                message: "Product Found With This Id and Name",
+                result,
+            })
+        }
+    } catch (error) {
+        res.status(400).json({
+            success: false,
+            message: error.message
+        })
+    }
+}
+
+exports.updateProduct = async (req, res) => {
+    try {
+        const updated = await productModel.findByIdAndUpdate(
+            { _id: req.params.id },
+            { $set: req.body },
+            { new: true },
+        )
+        if (!updated) {
+            res.status(400).json({
+                sucess: false,
+                message: "Product not found"
+            })
+        }
+        res.send(updated);
+    } catch (error) {
+        res.status(400).json({
+            success: false,
+            message: error.message,
+        })
+    }
+}
+
+exports.deleteProduct = async (req, res) => {
     try {
         const productId = req.params.id;
         const deleteItem = await productModel.findByIdAndDelete(productId);
-        console.log(deleteItem);
         if (!deleteItem) {
             return res.status(404).json({
                 message: "Product not found",

@@ -4,28 +4,57 @@ import DataTable from 'react-data-table-component';
 import axios from 'axios';
 import { AiFillDelete } from 'react-icons/ai'
 import { FiEdit2 } from 'react-icons/fi'
-
+import { toast } from 'react-toastify'
+import { Link, unstable_HistoryRouter, useParams } from "react-router-dom";
 
 
 export const HomeScreen = () => {
+  // UseStates
   const [productData, setProductData] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const params = useParams();
 
-  const handleEdit = () => { }
-  const handleDelete = async (id) => {
-    // try {
-    //   await axios.delete(`http://localhost:9000/deleteProduct/${id}`)
-    // }
-    // catch (error) {
-    //   console.error('Error deleting product:', error);
-    // }
-    console.log(id._id);
+
+  // UseEffects
+  useEffect(() => {
+    getProducts();
+    console.warn(params);
+  }, []);
+
+
+  // Functions
+  const getProducts = async () => {
+    try {
+      const result = await axios.get(`http://localhost:9000/allProducts`);
+      const products = result.data.products;
+      setProductData(products);
+      console.log('--> ', products);
+    } catch (error) {
+      console.log(error.message);
+    }
   }
 
+  const handleDelete = async (data) => {
+    const { _id } = data;
+    try {
+      const result = await axios.delete(`http://localhost:9000/deleteProduct/${_id}`)
+      if (result.status === 200) {
+        toast.success('Item Deleted Successfully');
+        getProducts();
+      }
+      else {
+        toast.error('Item Not Deleted')
+      }
+    }
+    catch (error) {
+      console.error('Error deleting product:', error);
+    }
+  }
 
   const customStyles = {
     headRow: {
       style: {
-        backgroundColor: '#900a5c',
+        backgroundColor: '#2c3844;',
         color: 'white'
       },
     },
@@ -37,26 +66,40 @@ export const HomeScreen = () => {
     },
   };
 
+  const nameSort = (a, b) => {
+    const nameA = a.name.toLowerCase();
+    const nameB = b.name.toLowerCase();
+    if (nameA < nameB) return -1;
+    if (nameA > nameB) return 1;
+    return 0;
+  };
+
+  const priceSort = (a, b) => a.price - b.price;
+
   const columns = [
     {
       name: 'Product Name',
       selector: (row) => row.name,
       sortable: true,
+      sortFunction: nameSort,
     },
     {
       name: 'Product Price',
       selector: (row) => "₹ " + row.price,
       sortable: true,
+      sortFunction: priceSort,
     },
     {
       name: 'Company',
       selector: (row) => row.company,
       sortable: true,
+      sortFunction: nameSort,
     },
     {
       name: 'Category',
       selector: (row) => row.category,
       sortable: true,
+      sortFunction: nameSort,
     },
     {
       name: 'Actions',
@@ -66,8 +109,10 @@ export const HomeScreen = () => {
         >
           <div
             className={styles.table_icon}
-            onClick={() => handleEdit(row)}>
-            <FiEdit2 />
+          >
+            <Link to={'/update/' + row._id}>
+              <FiEdit2 />
+            </Link>
           </div>
           <div
             className={styles.table_icon}
@@ -79,31 +124,41 @@ export const HomeScreen = () => {
     },
   ];
 
-  useEffect(() => {
-    axios.get('http://localhost:9000/allProducts')
-      .then((response) => {
-        const products = response.data.products;
-        setProductData(products);
-      })
-      .catch((error) => {
-        console.error('Error fetching product data:', error);
-      });
-  }, []);
-
   return (
     <div className={styles.homeScreen}>
       <div className={styles.table}>
-        <DataTable
+        {/* <DataTable
           title="Product List"
           customStyles={customStyles}
           columns={columns}
           data={productData}
-          pagination
+          // defaultSortFieldId={1}
           highlightOnHover
           pointerOnHover
+          pagination
         // fixedHeader
         // fixedHeaderScrollHeight="700px"
-        />
+        /> */}
+
+        {isLoading ? (
+          <div>
+            <img src="https://media.tenor.com/On7kvXhzml4AAAAj/loading-gif.gif"
+              alt="" />
+          </div>
+        ) : productData.length === 0 ? (
+          <h1>Data Not Found ... </h1>
+        ) : (
+          // Render the data table if data is available
+          <DataTable
+            title="Product List"
+            customStyles={customStyles}
+            columns={columns}
+            data={productData}
+            highlightOnHover
+            pointerOnHover
+            pagination
+          />
+        )}
       </div>
     </div>
   );
