@@ -4,6 +4,7 @@ import { Link, NavLink } from 'react-router-dom';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { Box, Button, TextField } from '@mui/material';
 
 
 const CreateAccount = () => {
@@ -67,7 +68,96 @@ const CreateAccount = () => {
 
   return (
     <div className={styles.form}>
-      <form onSubmit={handleSubmit}>
+
+      <Box
+        onSubmit={handleSubmit}
+        component="form"
+        autoComplete="off"
+      >
+        <h1
+          style={{
+            margin: "20px"
+          }}
+        >
+          Create An <span className={styles.amazingText} >Amazing</span> Account
+        </h1>
+        <TextField
+          sx={{
+            width: '30%',
+            margin: '10px',
+            textAlign: 'left',
+          }}
+          id="standard-basic"
+          label="Your Name"
+          variant="standard"
+          type="text"
+          name="name"
+          value={form.name}
+          onChange={handleChange}
+          required
+        />
+        <TextField
+          sx={{
+            width: '30%',
+            margin: '10px',
+            textAlign: 'left',
+          }}
+          id="standard-basic"
+          label="Your Username"
+          variant="standard"
+          type="username"
+          name="username"
+          value={form.username}
+          onChange={handleChange}
+          required
+        />
+        <TextField
+          sx={{
+            width: '30%',
+            margin: '10px',
+            textAlign: 'left',
+          }}
+          id="standard-basic"
+          label="Your Email"
+          variant="standard"
+          type="email"
+          name="email"
+          value={form.email}
+          onChange={handleChange}
+          required
+        />
+        <TextField
+          sx={{
+            width: '30%',
+            margin: '10px',
+          }}
+          id="standard-basic"
+          label="Your Password"
+          variant="standard"
+          type='password'
+          name="password"
+          value={form.password}
+          onChange={handleChange}
+          required
+        />
+        <Button
+          type='submit'
+          sx={{
+            marginTop: '10px',
+            backgroundColor: 'skyBlue'
+          }}
+          variant="contained"
+        >
+          Create An Account
+        </Button>
+
+        <Link to='/login'>
+          <Button>
+            Login
+          </Button>
+        </Link>
+      </Box>
+      {/* <form onSubmit={handleSubmit}>
         <h1
           style={{
             margin: "20px"
@@ -116,7 +206,7 @@ const CreateAccount = () => {
             Login
           </button>
         </Link>
-      </form>
+      </form> */}
     </div>
   );
 };

@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import styles from './Login.module.css';
+
 import { Link, Navigate, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
 
-
-const LoginScreen = () => { 
+const LoginScreen = () => {
 
     const [form, setForm] = useState({
         email: "",
@@ -19,8 +22,8 @@ const LoginScreen = () => {
             [name]: value
         }));
     };
-
     const navigate = useNavigate();
+
     useEffect(() => {
         const auth = localStorage.getItem('user credentials');
         if (auth) {
@@ -45,6 +48,7 @@ const LoginScreen = () => {
             if (result.status === 200) {
                 toast.success('Login successful');
                 localStorage.setItem('user credentials', JSON.stringify(result.data))
+                window.location.reload();
                 setForm({
                     email: "",
                     password: "",
@@ -63,7 +67,59 @@ const LoginScreen = () => {
     return (
         <>
             <div className={styles.form}>
-                <form onSubmit={handleSubmit}>
+
+                <Box
+                    onSubmit={handleSubmit}
+                    component="form"
+                    autoComplete="on"
+                >
+                    <TextField
+                        sx={{
+                            width: '50%',
+                            margin: '10px',
+                            textAlign: 'left',
+                        }}
+                        id="standard-basic"
+                        label="Email"
+                        variant="standard"
+                        type="email"
+                        name="email"
+                        value={form.email}
+                        onChange={handleChange}
+                        required
+                    />
+                    <TextField
+                        sx={{
+                            width: '50%',
+                            margin: '10px',
+                        }}
+                        id="standard-basic"
+                        label="Password"
+                        variant="standard"
+                        type='password'
+                        name="password"
+                        value={form.password}
+                        onChange={handleChange}
+                        required
+                    />
+                    <Button
+                        type='submit'
+                        sx={{
+                            marginTop: '10px',
+                            backgroundColor: 'skyBlue'
+                        }}
+                        variant="contained"
+                    >
+                        Login
+                    </Button>
+
+                    <Link to='/create'>
+                        <Button>
+                            Create An Account
+                        </Button>
+                    </Link>
+                </Box>
+                {/* <form onSubmit={handleSubmit}>
                     <h1
                         style={{
                             margin: "20px"
@@ -93,12 +149,8 @@ const LoginScreen = () => {
                     </button>
 
 
-                    <Link to='/create'>
-                        <button>
-                            Create An Account
-                        </button>
-                    </Link>
-                </form>
+
+                </form> */}
             </div>
         </>
     )

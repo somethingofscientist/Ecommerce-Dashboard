@@ -6,7 +6,7 @@ import { AiFillDelete } from 'react-icons/ai'
 import { FiEdit2 } from 'react-icons/fi'
 import { toast } from 'react-toastify'
 import { Link, useParams } from "react-router-dom"
-
+import { DataGrid } from '@mui/x-data-grid';
 
 export const HomeScreen = () => {
   const backend_url = process.env.REACT_APP_BACKEND_URL
@@ -15,21 +15,23 @@ export const HomeScreen = () => {
   const [isLoading, setIsLoading] = useState(false);
   const params = useParams();
 
-
   // UseEffects
   useEffect(() => {
     getProducts();
     console.warn(params);
   }, []);
 
-
   // Functions
   const getProducts = async () => {
     try {
       const result = await axios.get(`${backend_url}/allProducts`);
-      const products = result.data.products;
+      // const products = result.data.products;
+      const products = result.data.products.map((product, index) => ({
+        ...product,
+        id: index,
+      }));
       setProductData(products);
-      console.log('--> ', products);
+      console.log('product ->', products);
     } catch (error) {
       console.log(error.message);
     }
@@ -52,115 +54,157 @@ export const HomeScreen = () => {
     }
   }
 
-  const customStyles = {
-    headRow: {
-      style: {
-        backgroundColor: '#2c3844;',
-        color: 'white'
-      },
-    },
-    headCells: {
-      style: {
-        fontSize: '16px', // Customize header cell font size
-        fontWeight: 'bold', // Customize header cell font weight
-      },
-    },
-  };
-
-  const nameSort = (a, b) => {
-    const nameA = a.name.toLowerCase();
-    const nameB = b.name.toLowerCase();
-    if (nameA < nameB) return -1;
-    if (nameA > nameB) return 1;
-    return 0;
-  };
-
-  const priceSort = (a, b) => a.price - b.price;
-
   const columns = [
     {
-      name: 'Product Name',
-      selector: (row) => row.name,
-      sortable: true,
-      sortFunction: nameSort,
+      field: 'id',
+      headerName: 'S.No.',
+      width: 100
+    },
+    // {
+    //   field: '_id',
+    //   headerName: 'ID',
+    //   width: 250
+    // },
+    {
+      field: 'name',
+      headerName: 'Name',
+      width: 250
     },
     {
-      name: 'Product Price',
-      selector: (row) => "₹ " + row.price,
-      sortable: true,
-      sortFunction: priceSort,
+      field: 'price',
+      headerName: 'Price',
+      width: 100
     },
     {
-      name: 'Company',
-      selector: (row) => row.company,
-      sortable: true,
-      sortFunction: nameSort,
+      field: 'company',
+      headerName: 'Company',
+      width: 200
     },
     {
-      name: 'Category',
-      selector: (row) => row.category,
-      sortable: true,
-      sortFunction: nameSort,
-    },
-    {
-      name: 'Actions',
-      cell: (row) => (
-        <div
-          className={styles.table_icon_holder}
-        >
-          <div
-            className={styles.table_icon}
-          >
-            <Link to={'/update/' + row._id}>
-              <FiEdit2 />
-            </Link>
-          </div>
-          <div
-            className={styles.table_icon}
-            onClick={() => handleDelete(row)}>
-            <AiFillDelete />
-          </div>
-        </div>
-      ),
+      field: 'category',
+      headerName: 'Category',
+      width: 200
     },
   ];
 
-  return (
-    <div className={styles.homeScreen}>
-      <div className={styles.table}>
-        {/* <DataTable
-          title="Product List"
-          customStyles={customStyles}
-          columns={columns}
-          data={productData}
-          // defaultSortFieldId={1}
-          highlightOnHover
-          pointerOnHover
-          pagination
-        // fixedHeader
-        // fixedHeaderScrollHeight="700px"
-        /> */}
+  // const columns = [
+  //   {
+  //     name: 'Product Name',
+  //     selector: (row) => row.name,
+  //     sortable: true,
+  //     sortFunction: nameSort,
+  //   },
+  //   {
+  //     name: 'Product Price',
+  //     selector: (row) => "₹ " + row.price,
+  //     sortable: true,
+  //     sortFunction: priceSort,
+  //   },
+  //   {
+  //     name: 'Company',
+  //     selector: (row) => row.company,
+  //     sortable: true,
+  //     sortFunction: nameSort,
+  //   },
+  //   {
+  //     name: 'Category',
+  //     selector: (row) => row.category,
+  //     sortable: true,
+  //     sortFunction: nameSort,
+  //   },
+  //   {
+  //     name: 'Actions',
+  //     cell: (row) => (
+  //       <div
+  //         className={styles.table_icon_holder}
+  //       >
+  //         <div
+  //           className={styles.table_icon}
+  //         >
+  //           <Link to={'/update/' + row._id}>
+  //             <FiEdit2 />
+  //           </Link>
+  //         </div>
+  //         <div
+  //           className={styles.table_icon}
+  //           onClick={() => handleDelete(row)}>
+  //           <AiFillDelete />
+  //         </div>
+  //       </div>
+  //     ),
+  //   },
+  // ];
+  // const customStyles = {
+  //   headRow: {
+  //     style: {
+  //       backgroundColor: '#2c3844;',
+  //       color: 'white'
+  //     },
+  //   },
+  //   headCells: {
+  //     style: {
+  //       fontSize: '16px',
+  //       fontWeight: 'bold',
+  //     },
+  //   },
+  // };
+  // const nameSort = (a, b) => {
+  //   const nameA = a.name.toLowerCase();
+  //   const nameB = b.name.toLowerCase();
+  //   if (nameA < nameB) return -1;
+  //   if (nameA > nameB) return 1;
+  //   return 0;
+  // };
+  // const priceSort = (a, b) => a.price - b.price;
 
-        {isLoading ? (
-          <div>
-            <img src="https://media.tenor.com/On7kvXhzml4AAAAj/loading-gif.gif"
-              alt="" />
-          </div>
-        ) : productData.length === 0 ? (
-          <h1>Data Not Found ... </h1>
-        ) : (
-          // Render the data table if data is available
-          <DataTable
-            title="Product List"
-            customStyles={customStyles}
-            columns={columns}
-            data={productData}
-            highlightOnHover
-            pointerOnHover
-            pagination
-          />
-        )}
+
+  return (
+    // MUI DATA GRID --- MUI -> X
+    <>
+      <div style={{
+        height: 'max-content',
+        width: '70%',
+        margin: '100px auto',
+
+      }}>
+        <DataGrid
+          rows={productData}
+          columns={columns}
+          initialState={{
+            pagination: {
+              paginationModel: { page: 0, pageSize: 10 },
+            },
+          }}
+          pageSizeOptions={[10, 20, 30]}
+        // checkboxSelection
+        />
       </div>
-    </div>
+    </>
+
+
+    // REACT DATA TABLE COMPONENT --
+
+    // <div className={styles.homeScreen}>
+    //   <div className={styles.table}>
+    //     {isLoading ? (
+    //       <div>
+    //         <img src="https://media.tenor.com/On7kvXhzml4AAAAj/loading-gif.gif"
+    //           alt="" />
+    //       </div>
+    //     ) : productData.length === 0 ? (
+    //       <h1>Data Not Found ... </h1>
+    //     ) : (
+    //       <DataTable
+    //         title="Product List"
+    //         customStyles={customStyles}
+    //         columns={columns}
+    //         data={productData}
+    //         highlightOnHover
+    //         pointerOnHover
+    //         pagination
+    //       />
+    //     )}
+    //   </div>
+    // </div>
   );
 };

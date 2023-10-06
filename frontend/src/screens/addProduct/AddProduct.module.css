@@ -14,10 +14,10 @@
     border: none;
     color: white;
     margin-bottom: 20px;
-    background-color: #900a5c;
+    /* background-color: #900a5c; */
 }
 
 .form button:hover {
-    background-color: #900a5c !important;
+    background-color: rgb(61, 126, 255) !important;
     color: white;
 }

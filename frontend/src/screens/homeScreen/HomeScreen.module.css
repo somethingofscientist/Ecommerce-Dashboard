@@ -27,7 +27,7 @@
 }
 
 .table_icon:hover {
-    color: blueviolet;
+    /* color: blueviolet; */
 }
 
 @media (max-width:420px) {
