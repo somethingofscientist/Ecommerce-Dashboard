@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Libre+Baskerville&display=swap');
 
-
 .header {
     width: 100%;
     display: flex;
@@ -32,9 +31,13 @@
     width: 5%;
 }
 
-
 .header .left img {
     width: 100%;
+}
+
+.switch {
+    width: 20%;
+    border: 2px solid lime;
 }
 
 @media (max-width: 420px) {

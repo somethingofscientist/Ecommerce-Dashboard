@@ -5,10 +5,11 @@ import axios from 'axios';
 import { AiFillDelete } from 'react-icons/ai'
 import { FiEdit2 } from 'react-icons/fi'
 import { toast } from 'react-toastify'
-import { Link, unstable_HistoryRouter, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom"
 
 
 export const HomeScreen = () => {
+  const backend_url = process.env.REACT_APP_BACKEND_URL
   // UseStates
   const [productData, setProductData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -25,7 +26,7 @@ export const HomeScreen = () => {
   // Functions
   const getProducts = async () => {
     try {
-      const result = await axios.get(`http://localhost:9000/allProducts`);
+      const result = await axios.get(`${backend_url}/allProducts`);
       const products = result.data.products;
       setProductData(products);
       console.log('--> ', products);
