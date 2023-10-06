@@ -10,6 +10,7 @@ import PrivateRoutes from './components/PrivateRoutes/PrivateRoutes';
 import Header from './components/Header/Header';
 import AddProduct from './screens/addProduct/AddProduct';
 import UpdateProduct from './screens/updateProduct/UpdateProduct';
+import { ForgotPassword } from './screens/forgotPassword/ForgotPassword';
 
 const App = () => {
   const auth = localStorage.getItem('user credentials');
@@ -26,6 +27,7 @@ const App = () => {
 
         <Route path='/login' element={<LoginScreen />} />
         <Route path='/create' element={<CreateAccount />} />
+        <Route path='/forgot' element={<ForgotPassword />} />
         <Route path='*' element={<A404Screen />} />
       </Routes>
 

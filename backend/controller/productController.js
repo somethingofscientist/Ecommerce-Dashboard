@@ -68,6 +68,13 @@ exports.singleProduct = async (req, res) => {
     }
 }
 
+
+/**
+ * ! Endpoint to up
+ * @param {*} req 
+ * @param {*} res 
+ */
+
 exports.updateProduct = async (req, res) => {
     try {
         const updated = await productModel.findByIdAndUpdate(

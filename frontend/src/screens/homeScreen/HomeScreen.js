@@ -83,7 +83,12 @@ export const HomeScreen = () => {
     {
       field: 'category',
       headerName: 'Category',
-      width: 200
+      width: 300
+    },
+    {
+      field: 'actions',
+      headerName: 'Actions',
+      width: 100
     },
   ];
 
@@ -167,17 +172,27 @@ export const HomeScreen = () => {
         margin: '100px auto',
 
       }}>
-        <DataGrid
-          rows={productData}
-          columns={columns}
-          initialState={{
-            pagination: {
-              paginationModel: { page: 0, pageSize: 10 },
-            },
-          }}
-          pageSizeOptions={[10, 20, 30]}
-        // checkboxSelection
-        />
+        {isLoading ? (
+          <div>
+            <img src="https://media.tenor.com/On7kvXhzml4AAAAj/loading-gif.gif"
+              alt="" />
+          </div>
+        ) : productData.length === 0 ? (
+          <h3>Data Not Found ... </h3>
+        ) : (
+          <DataGrid
+            rows={productData}
+            columns={columns}
+            initialState={{
+              pagination: {
+                paginationModel: { page: 0, pageSize: 10 },
+              },
+            }}
+            pageSizeOptions={[10, 20, 30]}
+          // checkboxSelection
+          />
+        )
+        }
       </div>
     </>
 

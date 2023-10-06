@@ -67,7 +67,6 @@ const LoginScreen = () => {
     return (
         <>
             <div className={styles.form}>
-
                 <Box
                     onSubmit={handleSubmit}
                     component="form"
@@ -118,39 +117,12 @@ const LoginScreen = () => {
                             Create An Account
                         </Button>
                     </Link>
+                    <Link to='/forgot'>
+                        <Button>
+                            Forgot Password
+                        </Button>
+                    </Link>
                 </Box>
-                {/* <form onSubmit={handleSubmit}>
-                    <h1
-                        style={{
-                            margin: "20px"
-                        }}
-                    >
-                        Login
-                    </h1>
-                    <input
-                        type="email"
-                        name="email"
-                        placeholder='email'
-                        value={form.email}
-                        onChange={handleChange}
-                        required
-                    />
-                    <input
-                        type="password"
-                        name="password"
-                        placeholder='password'
-                        value={form.password}
-                        onChange={handleChange}
-                        required
-                    />
-                    <button
-                        type='submit'>
-                        Login
-                    </button>
-
-
-
-                </form> */}
             </div>
         </>
     )
